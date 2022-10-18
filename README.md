@@ -1,3 +1,3 @@
 # test-branching
 
-test force rebase
+This repo is to try out some new git branching
