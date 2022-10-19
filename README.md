@@ -11,3 +11,5 @@ on the fourth branch
 fourth branch 2nd commit
 
 I'm trying out a fifth branch without a squash
+
+and on multiple commits obviously
