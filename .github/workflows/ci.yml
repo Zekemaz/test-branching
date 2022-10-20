@@ -4,8 +4,8 @@ name: API CI
 #on: [push, XXX]
 on:
   push:
-    branches:
-      - main
+#    branches:
+#      - main
   pull_request:
     branches:
       - main
@@ -42,7 +42,7 @@ jobs:
 
     steps:
       - name: Run command
-        run: echo $(git branch -r --merged origin/develop origin/feature/fifth-feature) # argument for feature name ?
+#        run: echo $(git branch -r --merged origin/develop origin/feature/fifth-feature) # argument for feature name ?
         run: /test.sh
 
         with:
