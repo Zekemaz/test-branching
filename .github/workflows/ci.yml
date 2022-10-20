@@ -49,7 +49,6 @@ jobs:
 #          git config user.name "GitHub Actions Bot"
 #          git config user.email "<>"
 
-      - name:
       - name: get merged branches
         run: |
           echo "branch_name=$(git branch -r --merged origin/develop})" >> $GITHUB_ENV
