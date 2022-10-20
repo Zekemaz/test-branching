@@ -1,0 +1,49 @@
+name: API CI
+
+#on: push
+#on: [push, XXX]
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+# When a PR from a feature branch towards the test branch is created :
+#     Execute tests on feature branch
+#     If tests have passed, merge the feature into the test branch
+#     Execute the remaining tests on the test branch
+#
+#
+# When a PR from a feature branch towards the main branch is created :
+#     Verify if the last commit of the feature branch has been merged onto the test branch
+#     If it has, then it means the tests have been well executed and have passed
+#     If it has not, refuse the PR (message saying a PR towards the test branch is needed)
+#     Verify that the feature branch is also up-to-date with the main branch's content.
+#     If it is not, refuse the PR and send a message for a rebase
+#
+#
+
+
+# get last commit from feature branch
+# look through test branch's commits to find the feature branch last commit
+# git fetch --all to get all branches history
+# git log <branch-name> (feature) -> copy last commit hash
+# git log <branch-name> (test) -> check that feature hash = last test hash
+
+
+# bloquer l'acceptation de la PR if no conditions are met
+
+jobs:
+  check_pr:
+    runs-on: ubuntu-latest
+    name: Check if feature has been merge onto the develop branch
+
+    steps:
+      - name: Run command
+        run: echo $(git branch -r --merged origin/develop origin/feature/fifth-feature) # argument for feature name ?
+        run: /test.sh
+
+        with:
+          default-branch: main
