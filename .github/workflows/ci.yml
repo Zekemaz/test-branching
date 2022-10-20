@@ -10,6 +10,8 @@ on:
     types: [opened, reopened, edited]
     branches:
       - "main"
+      - "feature/*"
+
 
 jobs:
   check_pr:
