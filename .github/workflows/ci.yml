@@ -38,7 +38,9 @@ jobs:
           echo "7" $(git branch -r --no-merged origin/develop | grep origin/feature/${GITHUB_HEAD_REF##*/})
           if $(git branch -r --no-merged origin/develop | grep "origin/feature/${GITHUB_HEAD_REF##*/}") == "origin/feature/${GITHUB_HEAD_REF##*/}" then 
             echo "branche trouvée donc pas bon"; 
-          else 
+          fi
+          
+          if $(git branch -r --no-merged origin/develop | grep "origin/feature/${GITHUB_HEAD_REF##*/}") != "origin/feature/${GITHUB_HEAD_REF##*/}" then 
             echo "branche pas trouvée donc OK"; 
           fi
           
