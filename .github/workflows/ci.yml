@@ -6,6 +6,7 @@ on:
   pull_request:
     types:
       - opened
+      - edited
     branches:
       - main
 # When a PR from a feature branch towards the test branch is created :
