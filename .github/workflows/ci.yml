@@ -45,7 +45,8 @@ jobs:
 #        run: /test.sh
 #          echo ${github.head_ref}
         run: |
-          echo ${GITHUB_HEAD_REF##*/}
+          echo ${GITHUB_REF##*/}
+          echo ${GITHUB_REF}
 #          echo $(git branch -r --merged origin/develop ${github.head_ref})
 #          git branch -r --merged origin/develop ${github.head_ref} | grep "origin"
 #        run: if [ github.head_red == $commandOutput ]; then
