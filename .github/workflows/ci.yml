@@ -43,8 +43,6 @@ jobs:
       # Checkout the branch
       - name: checkout
         uses: actions/checkout@v2
-
-      - name: save current date
         run: |
           git config user.name "GitHub Actions Bot"
           git config user.email "<>"
