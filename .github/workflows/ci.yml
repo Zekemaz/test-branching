@@ -38,7 +38,6 @@ env:
   commandOutput: $(git branch -r --merged origin/develop ${{ github.head_ref }})
 jobs:
   check_pr:
-    if: github.head_red == $commandOutput
     runs-on: ubuntu-latest
     name: Check if feature has been merge onto the develop branch
 
@@ -46,7 +45,10 @@ jobs:
       - name: Run command
 #        run: echo $(git branch -r --merged origin/develop origin/feature/fifth-feature) # argument for feature name ?
 #        run: /test.sh
-        run: echo YIPIKAÏ YAY MOTHERFUCKER
+        run: echo ${{ github.head_ref }}
+        run: echo $commandOutput
+#        run: if [ github.head_red == $commandOutput ]; then
+#        echo YIPIKAÏ YAY MOTHERFUCKER
 #
 #        with:
 #          default-branch: main
