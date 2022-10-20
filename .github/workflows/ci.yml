@@ -3,9 +3,9 @@ name: API CI
 #on: push
 #on: [push, XXX]
 on:
-  push:
-    branches:
-      - "feature/*"
+#  push:
+#    branches:
+#      - "feature/*"
   pull_request:
     types: [opened, reopened, edited]
     branches:
