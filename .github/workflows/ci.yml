@@ -45,6 +45,7 @@ jobs:
 #        run: /test.sh
         run: |
 #          echo ${github.head_ref}
+          echo toto
           echo ${GITHUB_REF##*/}
 #          echo $(git branch -r --merged origin/develop ${github.head_ref})
 #          git branch -r --merged origin/develop ${github.head_ref} | grep "origin"
