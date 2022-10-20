@@ -34,12 +34,7 @@ jobs:
           echo "5" origin/feature/${GITHUB_HEAD_REF##*/}
           echo "6" $(git branch -r --no-merged origin/develop)
           echo "7" $(git branch -r --no-merged origin/develop | grep origin/feature/${GITHUB_HEAD_REF##*/})
-          if [ $(git branch -r --no-merged origin/develop | grep origin/feature/${GITHUB_HEAD_REF##*/}) == origin/feature/${GITHUB_HEAD_REF##*/} ]; then 
-            echo "branche trouvée donc pas bon"; 
-          fi
-          if [ $(git branch -r --no-merged origin/develop | grep origin/feature/${GITHUB_HEAD_REF##*/}) != origin/feature/${GITHUB_HEAD_REF##*/} ]; then 
-            echo "branche pas trouvée donc OK"; 
-          fi
+          
           if [ $(git branch -r --no-merged origin/develop | grep origin/feature/${GITHUB_HEAD_REF##*/}) == origin/feature/${GITHUB_HEAD_REF##*/} ]; then
             echo "The current Pull Request is not allowed as the feature/${GITHUB_HEAD_REF##*/} has not been merge into develop yet"
             exit 1
@@ -47,11 +42,9 @@ jobs:
             echo "The branch feature/${GITHUB_REF##*/} is allowed to be merged into master since it has already been merged into develop"
             exit 0
           fi
-
-#          if [ "$(git branch -r --merged origin/develop origin/feature/${GITHUB_HEAD_REF##*/})" != "origin/feature/${GITHUB_HEAD_REF##*/}" ]; then
-#            echo "The current Pull Request is not allowed as the feature/${GITHUB_HEAD_REF##*/} has not been merge into develop yet"
-#            exit 1
-#          else
-#            echo "The branch feature/${GITHUB_REF##*/} is allowed to be merged into master"
-#            exit 0
+#          if [ $(git branch -r --no-merged origin/develop | grep origin/feature/${GITHUB_HEAD_REF##*/}) == origin/feature/${GITHUB_HEAD_REF##*/} ]; then
+#            echo "branche trouvée donc pas bon";
+#          fi
+#          if [ $(git branch -r --no-merged origin/develop | grep origin/feature/${GITHUB_HEAD_REF##*/}) != origin/feature/${GITHUB_HEAD_REF##*/} ]; then
+#            echo "branche pas trouvée donc OK";
 #          fi
