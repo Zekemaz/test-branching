@@ -1,6 +1,6 @@
 #!/bin/sh
 
-originalbranch=$@
+originalbranch="origin/feature/"$@
 commandoutput=$(git branch -r --merged origin/develop $originalbranch)
 
 if [ "$commandoutput" != "origin/feature/fifth-feature" ]; then
