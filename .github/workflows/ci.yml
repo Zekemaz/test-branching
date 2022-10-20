@@ -50,9 +50,9 @@ jobs:
 #          git config user.email "<>"
 
       - name: get merged branches
-        run: |
 #          echo "branch_name=$(git branch -r --merged origin/develop origin/feature/third-feature)" >> $GITHUB_ENV
 #          echo ${{ env.branch_name }}
+        run: |
           if [ $(git branch -r --merged origin/develop origin/feature/third-feature) != "origin/feature/third-feature" ]; then
             echo "PR NOT ALLOWED"
             exit 1
