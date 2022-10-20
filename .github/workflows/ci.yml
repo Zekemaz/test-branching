@@ -51,12 +51,13 @@ jobs:
 
       - name: get merged branches
         run: |
-          if [ $(git branch -r --merged origin/develop origin/feature/third-feature}) != "origin/feature/third-feature" ]; then
+          branchName=$(git branch -r --merged origin/develop origin/feature/third-feature})
+          if [ "$branchName" != "origin/feature/third-feature" ]; then
             echo "PR NOT ALLOWED"
             exit 1
           else
             echo "PR ALLOWED"
-            echo $(git branch -r --merged origin/develop origin/feature/third-feature})
+            echo "$branchName"
             exit 0
           fi
 #          echo $(git branch -r --merged origin/develop)
