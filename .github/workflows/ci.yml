@@ -4,9 +4,10 @@ name: API CI
 #on: [push, XXX]
 on:
   pull_request:
+    types:
+      - opened
     branches:
       - main
-
 # When a PR from a feature branch towards the test branch is created :
 #     Execute tests on feature branch
 #     If tests have passed, merge the feature into the test branch
