@@ -3,9 +3,6 @@ name: API CI
 #on: push
 #on: [push, XXX]
 on:
-  push:
-#    branches:
-#      - main
   pull_request:
     branches:
       - main
@@ -25,15 +22,6 @@ on:
 #
 #
 
-
-# get last commit from feature branch
-# look through test branch's commits to find the feature branch last commit
-# git fetch --all to get all branches history
-# git log <branch-name> (feature) -> copy last commit hash
-# git log <branch-name> (test) -> check that feature hash = last test hash
-
-
-# bloquer l'acceptation de la PR if no conditions are met
 jobs:
   check_pr:
     runs-on: ubuntu-latest
@@ -45,35 +33,15 @@ jobs:
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
-#        run: |
-#          git config user.name "GitHub Actions Bot"
-#          git config user.email "<>"
 
       - name: get merged branches
-#          echo "branch_name=$(git branch -r --merged origin/develop origin/feature/third-feature)" >> $GITHUB_ENV
-#          echo ${{ env.branch_name }}
         run: |
-          if [ "$(git branch -r --merged origin/develop origin/feature/third-feature)" != "origin/feature/third-feature" ]; then
-            echo "PR NOT ALLOWED"
+          if [ $(git branch -r --merged origin/develop origin/feature/third-feature) != "origin/feature/third-feature" ]; then
+            echo "The current Pull Request is not allowed as the feature/${GITHUB_REF##*/} has not been merge into develop yet"
             exit 1
           else
-            echo "PR ALLOWED"
+            echo "The branch feature/${GITHUB_REF##*/} is allowed to be merged into master"
             exit 0
           fi
-#          echo $(git branch -r --merged origin/develop)
-#          hello=$(git branch -r --merged origin/develop origin/feature/${GITHUB_REF##*/})
-#          echo $hello
-
-      - name: Run command
-        run: |
-          echo YIPIKAÏ YAY MOTHERFUCKER
-#        run: echo $(git branch -r --merged origin/develop origin/feature/fifth-feature) # argument for feature name ?
-#        run: /test.sh
-#          echo ${github.head_ref}
-#          echo ${GITHUB_REF##*/}
-#          echo $(git branch -r --merged origin/develop origin/feature/${GITHUB_REF##*/})
-#          git branch -r --merged origin/develop ${github.head_ref} | grep "origin"
-#        run: if [ github.head_red == $commandOutput ]; then
-#
-#        with:
-#          default-branch: main
+        with:
+          default-branch: main
