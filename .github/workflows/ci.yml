@@ -34,8 +34,6 @@ on:
 
 
 # bloquer l'acceptation de la PR if no conditions are met
-env:
-  commandOutput: $(git branch -r --merged origin/develop ${{ github.head_ref }})
 jobs:
   check_pr:
     runs-on: ubuntu-latest
@@ -46,8 +44,9 @@ jobs:
 #        run: echo $(git branch -r --merged origin/develop origin/feature/fifth-feature) # argument for feature name ?
 #        run: /test.sh
         run: |
-          echo ${{ github.head_ref }}
-          echo $commandOutput
+          echo ${github.head_ref}
+          echo $(git branch -r --merged origin/develop ${github.head_ref})
+          git branch -r --merged origin/develop ${github.head_ref} | grep "origin"
 #        run: if [ github.head_red == $commandOutput ]; then
 #        echo YIPIKAÏ YAY MOTHERFUCKER
 #
