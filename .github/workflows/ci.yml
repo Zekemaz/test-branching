@@ -38,7 +38,7 @@ jobs:
 
       - name: get merged branches
         run: |
-          echo ${GITHUB_REF##*/}
+          echo ${GITHUB_HEAD_REF##*/}
           if [ $(git branch -r --merged origin/develop origin/feature/${GITHUB_REF##*/}) != "origin/feature/${GITHUB_REF##*/}" ]; then
             echo "The current Pull Request is not allowed as the feature/${GITHUB_REF##*/} has not been merge into develop yet"
             exit 1
