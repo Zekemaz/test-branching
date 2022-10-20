@@ -41,15 +41,17 @@ jobs:
 
     steps:
       # Checkout the branch
-      - name: checkout
+      - name: fetch it all
         uses: actions/checkout@v2
-        run: |
-          git config user.name "GitHub Actions Bot"
-          git config user.email "<>"
+        with:
+          fetch-depth: 0
+#        run: |
+#          git config user.name "GitHub Actions Bot"
+#          git config user.email "<>"
 
-      - name: commit
+      - name: get merged branches
         run: |
-#           Stage the file, commit and push
+          echo $(git branch -r --merged origin/develop)
           hello=$(git branch -r --merged origin/develop origin/feature/${GITHUB_REF##*/})
           echo $hello
 
