@@ -51,13 +51,13 @@ jobs:
 
       - name: get merged branches
         run: |
-          branchName=$(git branch -r --merged origin/develop origin/feature/third-feature})
-          if [ "$branchName" != "origin/feature/third-feature" ]; then
+          echo "branch_name=$(git branch -r --merged origin/develop origin/feature/third-feature})" >> $GITHUB_ENV
+          if [ "${{ env.branch_name }}" != "origin/feature/third-feature" ]; then
             echo "PR NOT ALLOWED"
             exit 1
           else
             echo "PR ALLOWED"
-            echo "$branchName"
+            echo "${{ env.branch_name }}"
             exit 0
           fi
 #          echo $(git branch -r --merged origin/develop)
