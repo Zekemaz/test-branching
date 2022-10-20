@@ -34,10 +34,11 @@ on:
 
 
 # bloquer l'acceptation de la PR if no conditions are met
-
+env:
+  commandOutput: $(git branch -r --merged origin/develop ${{ github.head_ref }})
 jobs:
   check_pr:
-    if: github.head_red == $(git branch -r --merged origin/develop github.head_ref)
+    if: github.head_red == $commandOutput
     runs-on: ubuntu-latest
     name: Check if feature has been merge onto the develop branch
 
