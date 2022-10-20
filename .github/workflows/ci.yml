@@ -45,8 +45,9 @@ jobs:
       - name: Run command
 #        run: echo $(git branch -r --merged origin/develop origin/feature/fifth-feature) # argument for feature name ?
 #        run: /test.sh
-        run: echo ${{ github.head_ref }}
-        run: echo $commandOutput
+        run: |
+          echo ${{ github.head_ref }}
+          echo $commandOutput
 #        run: if [ github.head_red == $commandOutput ]; then
 #        echo YIPIKAÏ YAY MOTHERFUCKER
 #
