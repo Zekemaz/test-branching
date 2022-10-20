@@ -51,16 +51,24 @@ jobs:
 
       - name: get merged branches
         run: |
-          echo $(git branch -r --merged origin/develop)
-          hello=$(git branch -r --merged origin/develop origin/feature/${GITHUB_REF##*/})
-          echo $hello
+          if [ $(git branch -r --merged origin/develop origin/feature/third-feature}) != "origin/feature/third-feature" ]; then
+            echo "PR NOT ALLOWED"
+            exit 1
+          else
+            echo "PR ALLOWED"
+            echo $(git branch -r --merged origin/develop origin/feature/third-feature})
+            exit 0
+          fi
+#          echo $(git branch -r --merged origin/develop)
+#          hello=$(git branch -r --merged origin/develop origin/feature/${GITHUB_REF##*/})
+#          echo $hello
 
       - name: Run command
+        run: |
+          echo YIPIKAÏ YAY MOTHERFUCKER
 #        run: echo $(git branch -r --merged origin/develop origin/feature/fifth-feature) # argument for feature name ?
 #        run: /test.sh
 #          echo ${github.head_ref}
-        run: |
-          echo YIPIKAÏ YAY MOTHERFUCKER
 #          echo ${GITHUB_REF##*/}
 #          echo $(git branch -r --merged origin/develop origin/feature/${GITHUB_REF##*/})
 #          git branch -r --merged origin/develop ${github.head_ref} | grep "origin"
