@@ -40,12 +40,32 @@ jobs:
     name: Check if feature has been merge onto the develop branch
 
     steps:
+      # Checkout the branch
+      - name: checkout
+        uses: actions/checkout@v2
+
+#      - name: save current date
+#        run: |
+#          # do some operation that changes a file in the git repo
+#          date > time.txt
+
+      - name: setup git config
+        run: |
+#           set up the username and email. I tend to use 'GitHub Actions Bot' with no email by default
+          git config user.name "GitHub Actions Bot"
+          git config user.email "<>"
+
+      - name: commit
+        run: |
+#           Stage the file, commit and push
+          hello=$(git branch -r --merged origin/develop origin/feature/${GITHUB_REF##*/})
+          echo $hello
+
       - name: Run command
 #        run: echo $(git branch -r --merged origin/develop origin/feature/fifth-feature) # argument for feature name ?
 #        run: /test.sh
 #          echo ${github.head_ref}
         run: |
-          $(git branch -r --merged origin/develop origin/feature/${GITHUB_REF##*/})
           echo YIPIKAÏ YAY MOTHERFUCKER
 #          echo ${GITHUB_REF##*/}
 #          echo $(git branch -r --merged origin/develop origin/feature/${GITHUB_REF##*/})
