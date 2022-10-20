@@ -46,7 +46,6 @@ jobs:
 #          echo ${github.head_ref}
         run: |
           echo ${GITHUB_REF##*/}
-          git fetch --all
           echo $(git branch -r --merged origin/develop origin/feature/${GITHUB_REF##*/})
           $(git branch -r --merged origin/develop origin/feature/${GITHUB_REF##*/})
           echo YIPIKAÏ YAY MOTHERFUCKER
