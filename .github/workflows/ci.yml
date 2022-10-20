@@ -33,6 +33,7 @@ jobs:
           echo "4" $(git branch -r --merged origin/develop)
           echo "5" origin/feature/${GITHUB_HEAD_REF##*/}
           echo "6" $(git branch -r --no-merged origin/develop)
+          echo "6" $(git branch -r --no-merged origin/develop | grep origin/feature/${GITHUB_HEAD_REF##*/})
           if [ "$(git branch -r --no-merged origin/develop | grep origin/feature/${GITHUB_HEAD_REF##*/})" == "origin/feature/${GITHUB_HEAD_REF##*/}" ]; then
             echo "The current Pull Request is not allowed as the feature/${GITHUB_HEAD_REF##*/} has not been merge into develop yet"
             exit 1
