@@ -44,5 +44,3 @@ jobs:
             echo "The branch feature/${GITHUB_REF##*/} is allowed to be merged into master"
             exit 0
           fi
-        with:
-          default-branch: main
