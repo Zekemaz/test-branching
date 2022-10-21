@@ -1,9 +1,9 @@
 name: Main CI for git branching
 
 on:
-  push:
-    branches:
-      - "feature/*"
+#  push:
+#    branches:
+#      - "feature/*"
   pull_request:
     types: [opened, reopened, edited, synchronize]
     branches:
@@ -28,7 +28,7 @@ jobs:
 
       - name: Get merged branches
         run: |
-          if [ $(git branch -r --merged origin/develop | grep origin/feature/${GITHUB_HEAD_REF##*/}) != origin/feature/${GITHUB_HEAD_REF##*/} ]; then
+          if [ $(git branch -r --merged origin/develop | grep origin/feature/${GITHUB_HEAD_REF##*/}) != origin/feature/${GITHUB_HEAD_REF##*/} && $(git branch -r --merged origin/develop | grep origin/feature/${GITHUB_HEAD_REF##*/}) != origin/feature/]; then
             echo "The current pull request is not allowed as the feature/${GITHUB_HEAD_REF##*/} has not been merge into develop yet"
             exit 1
           else
