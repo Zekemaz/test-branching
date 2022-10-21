@@ -31,6 +31,7 @@ jobs:
 <<<<<<< Updated upstream
       - name: tests
         run: echo "test en cours"
+<<<<<<< HEAD
 =======
       - name: Fetch all branches
         uses: actions/checkout@v2
@@ -47,3 +48,5 @@ jobs:
             exit 0
           fi
 >>>>>>> Stashed changes
+=======
+>>>>>>> 3f44718 (fix: bruh)

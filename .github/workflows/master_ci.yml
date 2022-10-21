@@ -16,6 +16,7 @@ on:
 
 
 # https://stackoverflow.com/questions/62750603/github-actions-trigger-another-action-after-one-action-is-completed#:~:text=2.-,Separate,-workflow%2C%20using%20the
+<<<<<<< HEAD
 =======
 name: API CI
 
@@ -30,6 +31,9 @@ on:
 
 
 >>>>>>> Stashed changes
+=======
+
+>>>>>>> 3f44718 (fix: bruh)
 jobs:
   check_pr:
     runs-on: ubuntu-latest
