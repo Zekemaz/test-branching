@@ -15,7 +15,6 @@ on:
 
 jobs:
   update_main_pr:
-    if: github.head_ref == 'develop'
     runs-on: ubuntu-latest
     name: Update main's current PR
 
