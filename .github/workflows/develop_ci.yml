@@ -1,11 +1,20 @@
+<<<<<<< Updated upstream
 name: DevelopCI
+=======
+name: API CI
+>>>>>>> Stashed changes
 
 on:
   push:
     branches:
+<<<<<<< Updated upstream
       - "feature/*"
   pull_request:
     types: [ opened, reopened, edited, synchronize ]
+=======
+      - develop
+  pull_request:
+>>>>>>> Stashed changes
     branches:
       - develop
 
@@ -19,5 +28,22 @@ jobs:
     name: Update main's current PR
 
     steps:
+<<<<<<< Updated upstream
       - name: tests
         run: echo "test en cours"
+=======
+      - name: Fetch all branches
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Get merged branches
+        run: |
+          if [ $(git branch -r --merged origin/develop | grep origin/feature/${GITHUB_HEAD_REF##*/}) != origin/feature/${GITHUB_HEAD_REF##*/} ]; then
+            echo "The current pull request is not allowed as the feature/${GITHUB_HEAD_REF##*/} has not been merge into develop yet"
+            exit 1
+          else
+            echo "The branch feature/${GITHUB_HEAD_REF##*/} is allowed to be merged into master since it has already been merged into develop"
+            exit 0
+          fi
+>>>>>>> Stashed changes

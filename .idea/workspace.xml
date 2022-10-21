@@ -2,7 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f6f09415-c60c-48c1-91bb-d0639c7f7ecd" name="Changes" comment="fix: ci">
+<<<<<<< Updated upstream
       <change beforePath="$PROJECT_DIR$/.github/workflows/master_ci.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/master_ci.yml" afterDir="false" />
+=======
+      <change afterPath="$PROJECT_DIR$/.github/workflows/develop_ci.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.github/workflows/ci.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/master_ci.yml" afterDir="false" />
+>>>>>>> Stashed changes
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
