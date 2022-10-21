@@ -1,4 +1,4 @@
-name: Main CI for git branching
+name: MainCI
 
 on:
 #  push:
