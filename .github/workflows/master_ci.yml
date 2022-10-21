@@ -5,16 +5,16 @@ on:
     types: [ opened, reopened, edited, synchronize ]
     branches:
       - 'main'
-  workflow_run:
-    workflows: [DevelopCI]
-    types:
-      - completed
+#  workflow_run:
+#    workflows: [DevelopCI]
+#    types:
+#      - completed
 
 
 # https://stackoverflow.com/questions/62750603/github-actions-trigger-another-action-after-one-action-is-completed#:~:text=2.-,Separate,-workflow%2C%20using%20the
 jobs:
   check_pr:
-    if: startsWith(github.head_ref, 'feature/')
+    if: startsWith(github.head_ref, 'feature/') && github.base_ref === 'main'
     runs-on: ubuntu-latest
     name: Check if feature has been merge onto the develop branch
 
