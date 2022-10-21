@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 name: MainCI
 
 on:
@@ -16,24 +15,6 @@ on:
 
 
 # https://stackoverflow.com/questions/62750603/github-actions-trigger-another-action-after-one-action-is-completed#:~:text=2.-,Separate,-workflow%2C%20using%20the
-<<<<<<< HEAD
-=======
-name: API CI
-
-on:
-  push:
-    branches:
-      - "feature/*"
-  pull_request:
-    types: [opened, reopened, edited, synchronize]
-    branches:
-      - "main"
-
-
->>>>>>> Stashed changes
-=======
-
->>>>>>> 3f44718 (fix: bruh)
 jobs:
   check_pr:
     runs-on: ubuntu-latest
@@ -47,11 +28,7 @@ jobs:
 
       - name: Get merged branches
         run: |
-<<<<<<< Updated upstream
           if [ $(git branch -r --merged origin/develop | grep origin/feature/${GITHUB_HEAD_REF##*/}) != origin/feature/${GITHUB_HEAD_REF##*/} && $(git branch -r --merged origin/develop | grep origin/feature/${GITHUB_HEAD_REF##*/}) != origin/feature/]; then
-=======
-          if [ $(git branch -r --merged origin/develop | grep origin/feature/${GITHUB_HEAD_REF##*/}) != origin/feature/${GITHUB_HEAD_REF##*/} ]; then
->>>>>>> Stashed changes
             echo "The current pull request is not allowed as the feature/${GITHUB_HEAD_REF##*/} has not been merge into develop yet"
             exit 1
           else
