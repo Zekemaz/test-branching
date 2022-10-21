@@ -1,13 +1,13 @@
 name: MainCI
 
 on:
-#  push:
-#    branches:
-#      - "feature/*"
-  pull_request:
-    types: [opened, reopened, edited, synchronize]
+  push:
     branches:
-      - main
+      - 'feature/*'
+  pull_request:
+    types: [ opened, reopened, edited, synchronize ]
+    branches:
+      - 'main'
   workflow_run:
     workflows: [DevelopCI]
     types:
@@ -17,6 +17,7 @@ on:
 # https://stackoverflow.com/questions/62750603/github-actions-trigger-another-action-after-one-action-is-completed#:~:text=2.-,Separate,-workflow%2C%20using%20the
 jobs:
   check_pr:
+    if: github.head_ref == 'main'
     runs-on: ubuntu-latest
     name: Check if feature has been merge onto the develop branch
 

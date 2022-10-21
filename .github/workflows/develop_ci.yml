@@ -3,11 +3,11 @@ name: DevelopCI
 on:
   push:
     branches:
-      - "feature/*"
+      - 'feature/*'
   pull_request:
     types: [ opened, reopened, edited, synchronize ]
     branches:
-      - develop
+      - 'develop'
 
 
 #If a PR has been refused on main, the developer is going to make new commits to the develop branch.
@@ -15,6 +15,7 @@ on:
 
 jobs:
   update_main_pr:
+    if: github.head_ref == 'develop'
     runs-on: ubuntu-latest
     name: Update main's current PR
 
