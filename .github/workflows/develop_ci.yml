@@ -1,9 +1,6 @@
 name: DevelopCI
 
 on:
-  push:
-    branches:
-      - 'feature/*'
   pull_request:
     types: [ opened, reopened, edited, synchronize ]
     branches:
@@ -15,6 +12,7 @@ on:
 
 jobs:
   update_main_pr:
+    if: startsWith(github.head_ref, 'feature/')
     runs-on: ubuntu-latest
     name: Update main's current PR
 
