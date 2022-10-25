@@ -6,7 +6,7 @@ on:
         - "feature/*"
 
 jobs:
-  run tests:
+  tests_run:
     runs-on: ubuntu-latest
     name: Run feature tests
 
