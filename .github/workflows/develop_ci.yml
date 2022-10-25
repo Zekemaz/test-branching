@@ -11,7 +11,7 @@ on:
 #From then, when new commit/PR are added onto develop, the "main" PR has to be updated and ran once more
 
 jobs:
-  update_main_pr:
+  dev_tests_run:
     runs-on: ubuntu-latest
     name: Update main's current PR
 
