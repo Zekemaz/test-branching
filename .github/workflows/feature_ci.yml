@@ -1,0 +1,20 @@
+name: FeatureCI
+
+on:
+    push:
+      branches:
+        - "feature/*"
+
+jobs:
+  run tests:
+    runs-on: ubuntu-latest
+    name: Run feature tests
+
+    steps:
+      - name: tests
+        run: echo "test feature en cours"
+
+
+# a little comment to disrupt my whole world, I'll probably need a fixme right after I commit this shit
+
+# again some shit

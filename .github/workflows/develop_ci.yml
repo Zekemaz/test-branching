@@ -1,9 +1,6 @@
 name: DevelopCI
 
 on:
-#  push:
-#    branches:
-#      - "feature/*"
   pull_request:
     types: [ opened, reopened, edited, synchronize ]
     branches:
@@ -20,7 +17,7 @@ jobs:
 
     steps:
       - name: tests
-        run: echo "test en cours"
+        run: echo "test DevelopCI en cours"
 
 
 # a little comment to disrupt my whole world, I'll probably need a fixme right after I commit this shit 
