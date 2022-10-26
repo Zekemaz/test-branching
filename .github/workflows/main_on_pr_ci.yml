@@ -5,7 +5,12 @@ on:
     types: [opened, reopened, edited, synchronize]
     branches:
       - main
-        
+  workflow_run:
+    workflows: [ DevelopCI ]
+    types: [ completed ]
+    branches: [ develop ]
+
+
 jobs:      
   check_pull_request_if_opened:
     if: startsWith(github.head_ref, 'feature/')
@@ -30,6 +35,7 @@ jobs:
           fi
           
   check_for_validated_tests:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/download-artifact@v3
