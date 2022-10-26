@@ -6,7 +6,6 @@ on:
     branches:
       - develop
 
-
 jobs:
   dev_tests_run:
     if: startsWith(github.head_ref, 'feature/')
