@@ -3,10 +3,8 @@ name: Main_from_dev_PR_CI
 on: 
   workflow_run:
     workflows: [DevelopCI]
-    types:
-      - completed
-    branches:
-      - main
+    types: [completed]
+    branches: [develop]
 
 jobs:
   update_pull_request_from_dev_if:
