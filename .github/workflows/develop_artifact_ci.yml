@@ -4,17 +4,19 @@ on:
   #  Will only run when a workflow named DevelopCI runs on a branch named "develop"
   workflow_run:
     workflows: [DevelopCI]
-    types: [completed]
+    types: [requested]
     branches: [develop]
 
 env:
   TEST_SUCCESS: ${{ github.event.workflow_run.conclusion == 'success' }}
+  
 jobs:
-  write_artifact_on_dev_tests_failure:
+  write_artifact_on_dev_tests:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     name: Write an artifact
     steps:
-      #      As Boolean, if test have passed then <true> else <false>
+      # As Boolean, if test have passed then <true> else <false>
       - name: Upload test results to artifact
         run: |
           mkdir -p ./test-results/test-artifact.txt
