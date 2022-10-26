@@ -7,21 +7,26 @@ on:
       - develop
 
 
-#If a PR has been refused on main, the developer is going to make new commits to the develop branch.
-#From then, when new commit/PR are added onto develop, the "main" PR has to be updated and ran once more
-
 jobs:
   dev_tests_run:
-#    if: github.event.pull_request.merge == 'False'
+    if: startsWith(github.head_ref, 'feature/')
     runs-on: ubuntu-latest
-    name: Update main's current PR
-
+    name: Run unit tests
+# run tests
+#     workflow run
+#    if test fail write to a txt file
+#    workflow run on main
+#    if fail don't merge
     steps:
-      - name: tests
-        run: echo "test DevelopCI en cours"
-
-
-
-# a little comment to disrupt my whole world, I'll probably need a fixme right after I commit this shit 
-
-# again some shit
+      - name: Run unit tests and save results
+        run: |
+          echo "running unit tests"
+          
+  dev_integration_tests:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    name: Run integration tests
+    steps:
+      - name: integration tests
+        run: |
+          echo "running integration tests"

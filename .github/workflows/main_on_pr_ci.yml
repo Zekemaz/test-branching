@@ -1,13 +1,19 @@
-name: Main_PR_CI
+name: MainCI
 
 on:
   pull_request:
     types: [opened, reopened, edited, synchronize]
     branches:
       - main
+  workflow_run:
+    workflows: [ DevelopCI ]
+    types: [ completed ]
+    branches: [ develop ]
+
 
 jobs:      
   check_pull_request_if_opened:
+    if: startsWith(github.head_ref, 'feature/')
     runs-on: ubuntu-latest
     name: Check if feature has been merge onto the develop branch
     steps:
@@ -18,24 +24,25 @@ jobs:
 
       - name: Get merged branches
         run: |
-          if [ $(git branch -r --merged origin/develop | grep origin/feature/${GITHUB_HEAD_REF##*/}) != origin/feature/${GITHUB_HEAD_REF##*/} && $(git branch -r --merged origin/develop | grep origin/feature/${GITHUB_HEAD_REF##*/}) != origin/feature/]; then
-            echo "The current pull request is not allowed as the feature/${GITHUB_HEAD_REF##*/} has not been merge into develop yet"
-            exit 1
-          else
+          echo origin/feature/${GITHUB_HEAD_REF##*/}
+          echo $(git branch -r --merged origin/develop)
+          if [ $(git branch -r --merged origin/develop | grep origin/feature/${GITHUB_HEAD_REF##*/}) && $(git branch -r --merged origin/develop | grep origin/feature/${GITHUB_HEAD_REF##*/}) != origin/feature/]; then
             echo "The branch feature/${GITHUB_HEAD_REF##*/} is allowed to be merged into master since it has already been merged into develop"
             exit 0
+          else
+            echo "The current pull request is not allowed as the feature/${GITHUB_HEAD_REF##*/} has not been merge into develop yet"
+            exit 1
           fi
-
-  #  echo "1" ${GITHUB_HEAD_REF##*/}
-  #  echo "2" ${GITHUB_REF##*/}
-  #  echo "3" $(git branch -r --merged origin/develop origin/feature/${GITHUB_HEAD_REF##*/})
-  #  echo "4" $(git branch -r --merged origin/develop)
-  #  echo "5" origin/feature/${GITHUB_HEAD_REF##*/}
-  #  echo "6" $(git branch -r --no-merged origin/develop)
-  #  echo "7" $(git branch -r --no-merged origin/develop | grep origin/feature/${GITHUB_HEAD_REF##*/})
-  #  if [ $(git branch -r --no-merged origin/develop | grep origin/feature/${GITHUB_HEAD_REF##*/}) == origin/feature/${GITHUB_HEAD_REF##*/} ]; then
-  #  echo "branche trouvée donc pas bon";
-  #  fi
-  #  if [ $(git branch -r --no-merged origin/develop | grep origin/feature/${GITHUB_HEAD_REF##*/}) != origin/feature/${GITHUB_HEAD_REF##*/} ]; then
-  #  echo "branche pas trouvée donc OK";
-  #  fi
+          
+  check_for_validated_tests:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v3
+        with:
+          name: test-results-artifact
+          path: ./test-results/test-artifact.txt
+      
+      - name: Display content of test-artifact
+        run: cat test-artifact.txt
+        working-directory: ./test-results/test-artifact.txt

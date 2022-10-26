@@ -1,28 +1,27 @@
-name: Main_from_dev_PR_CI
+name: MainCIFromDev
 
-on: 
+on:
+#  Will only run when a workflow named DevelopCI runs on a branch named "develop"
   workflow_run:
     workflows: [DevelopCI]
-    types:
-      - completed
-    branches:
-      - main
+    types: [completed]
+    branches: [develop]
 
-
-# https://stackoverflow.com/questions/62750603/github-actions-trigger-another-action-after-one-action-is-completed#:~:text=2.-,Separate,-workflow%2C%20using%20the
 jobs:
   update_pull_request_from_dev_if:
-    if: github.event.workflow_run.conclusion == 'success'
+    if: ${{ github.event.workflow_run.conclusion == 'success' }} && startsWith(github.head_ref, 'feature/')
     runs-on: ubuntu-latest
     name: Check if feature is still compliant with requirements on main
     steps:
       - name: run test
         run: |
           echo "running test on main if DevelopCI has passed"
-          if [ $(git branch -r --merged origin/develop | grep origin/feature/${GITHUB_HEAD_REF##*/}) != origin/feature/${GITHUB_HEAD_REF##*/} && $(git branch -r --merged origin/develop | grep origin/feature/${GITHUB_HEAD_REF##*/}) != origin/feature/]; then
-            echo "The current pull request is not allowed as the feature/${GITHUB_HEAD_REF##*/} has not been merge into develop yet"
-            exit 1
-          else
+          echo origin/feature/${GITHUB_HEAD_REF##*/}
+          echo $(git branch -r --merged origin/develop)
+          if [ $(git branch -r --merged origin/develop | grep origin/feature/${GITHUB_HEAD_REF##*/}) && $(git branch -r --merged origin/develop | grep origin/feature/${GITHUB_HEAD_REF##*/}) != origin/feature/]; then
             echo "The branch feature/${GITHUB_HEAD_REF##*/} is allowed to be merged into master since it has already been merged into develop"
             exit 0
+          else
+            echo "The current pull request is not allowed as the feature/${GITHUB_HEAD_REF##*/} has not been merge into develop yet"
+            exit 1
           fi
