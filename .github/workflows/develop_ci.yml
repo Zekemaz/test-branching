@@ -7,9 +7,6 @@ on:
       - develop
 
 
-#If a PR has been refused on main, the developer is going to make new commits to the develop branch.
-#From then, when new commit/PR are added onto develop, the "main" PR has to be updated and ran once more
-
 jobs:
   dev_tests_run:
 #    if: github.event.pull_request.merge == 'False'
@@ -19,9 +16,3 @@ jobs:
     steps:
       - name: tests
         run: echo "test DevelopCI en cours"
-
-
-
-# a little comment to disrupt my whole world, I'll probably need a fixme right after I commit this shit 
-
-# again some shit

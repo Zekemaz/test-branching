@@ -5,7 +5,7 @@ on:
     types: [opened, reopened, edited, synchronize]
     branches:
       - main
-# add comment to see if triggered
+        
 jobs:      
   check_pull_request_if_opened:
     runs-on: ubuntu-latest
@@ -19,6 +19,7 @@ jobs:
       - name: Get merged branches
         run: |
           echo origin/feature/${GITHUB_HEAD_REF##*/}
+          echo git branch -r --merged origin/develop
           if [ $(git branch -r --merged origin/develop | grep origin/feature/${GITHUB_HEAD_REF##*/}) && $(git branch -r --merged origin/develop | grep origin/feature/${GITHUB_HEAD_REF##*/}) != origin/feature/]; then
             echo "The branch feature/${GITHUB_HEAD_REF##*/} is allowed to be merged into master since it has already been merged into develop"
             exit 0
@@ -26,17 +27,3 @@ jobs:
             echo "The current pull request is not allowed as the feature/${GITHUB_HEAD_REF##*/} has not been merge into develop yet"
             exit 1
           fi
-
-  #  echo "1" ${GITHUB_HEAD_REF##*/}
-  #  echo "2" ${GITHUB_REF##*/}
-  #  echo "3" $(git branch -r --merged origin/develop origin/feature/${GITHUB_HEAD_REF##*/})
-  #  echo "4" $(git branch -r --merged origin/develop)
-  #  echo "5" origin/feature/${GITHUB_HEAD_REF##*/}
-  #  echo "6" $(git branch -r --no-merged origin/develop)
-  #  echo "7" $(git branch -r --no-merged origin/develop | grep origin/feature/${GITHUB_HEAD_REF##*/})
-  #  if [ $(git branch -r --no-merged origin/develop | grep origin/feature/${GITHUB_HEAD_REF##*/}) == origin/feature/${GITHUB_HEAD_REF##*/} ]; then
-  #  echo "branche trouvée donc pas bon";
-  #  fi
-  #  if [ $(git branch -r --no-merged origin/develop | grep origin/feature/${GITHUB_HEAD_REF##*/}) != origin/feature/${GITHUB_HEAD_REF##*/} ]; then
-  #  echo "branche pas trouvée donc OK";
-  #  fi
