@@ -12,7 +12,7 @@ on:
 
 jobs:
   dev_tests_run:
-    if: github.event.pull_request.merge == 'False'
+#    if: github.event.pull_request.merge == 'False'
     runs-on: ubuntu-latest
     name: Update main's current PR
 
