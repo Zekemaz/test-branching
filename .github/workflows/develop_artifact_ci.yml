@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Write an artifact
     steps:
-      #      As Boolean, if test have passed then <true> else <false>
+      # As Boolean, if test have passed then <true> else <false>
       - name: Upload test results to artifact
         run: |
           mkdir -p ./test-results/test-artifact.txt
