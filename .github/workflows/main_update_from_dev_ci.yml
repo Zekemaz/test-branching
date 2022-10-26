@@ -1,6 +1,7 @@
 name: Main_from_dev_PR_CI
 
-on: 
+on:
+#  Will only run when a workflow named DevelopCI runs on a branch named "develop"
   workflow_run:
     workflows: [DevelopCI]
     types: [completed]
@@ -8,7 +9,7 @@ on:
 
 jobs:
   update_pull_request_from_dev_if:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    if: ${{ github.event.workflow_run.conclusion == 'success' }} && startsWith(github.head_ref, 'feature/')
     runs-on: ubuntu-latest
     name: Check if feature is still compliant with requirements on main
     steps:

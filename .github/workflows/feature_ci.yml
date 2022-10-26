@@ -11,5 +11,5 @@ jobs:
     name: Run feature tests
 
     steps:
-      - name: tests
-        run: echo "test feature en cours"
+      - name: Unit testing
+        run: echo "running unit tests"

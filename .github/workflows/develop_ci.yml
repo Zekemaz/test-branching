@@ -9,10 +9,20 @@ on:
 
 jobs:
   dev_tests_run:
-#    if: ${{ github.event.pull_request.merge == 'False' }}
+    if: startsWith(github.head_ref, 'feature/')
     runs-on: ubuntu-latest
-    name: Update main's current PR
+    name: Run unit tests
 
     steps:
-      - name: tests
-        run: echo "test DevelopCI en cours"
+      - name: Run unit tests
+        run: |
+          echo "running unit tests"
+
+  dev_integration_tests:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    name: Run integration tests
+    steps:
+      - name: integration tests
+        run: |
+          echo "running integration tests"
