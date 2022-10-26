@@ -1,4 +1,4 @@
-name: Dev_tests_failure
+name: DevelopArtifactCI
 
 on:
   #  Will only run when a workflow named DevelopCI runs on a branch named "develop"

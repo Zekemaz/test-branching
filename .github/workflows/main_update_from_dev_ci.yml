@@ -1,4 +1,4 @@
-name: Main_from_dev_PR_CI
+name: MainCIFromDev
 
 on:
 #  Will only run when a workflow named DevelopCI runs on a branch named "develop"
