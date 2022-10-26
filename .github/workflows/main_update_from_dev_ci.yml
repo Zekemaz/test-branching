@@ -17,7 +17,7 @@ jobs:
       - name: run test
         run: |
           echo "running test on main if DevelopCI has passed"
-          origin/feature/${GITHUB_HEAD_REF##*/}
+          echo origin/feature/${GITHUB_HEAD_REF##*/}
           if [ $(git branch -r --merged origin/develop | grep origin/feature/${GITHUB_HEAD_REF##*/}) != origin/feature/${GITHUB_HEAD_REF##*/} && $(git branch -r --merged origin/develop | grep origin/feature/${GITHUB_HEAD_REF##*/}) != origin/feature/]; then
             echo "The current pull request is not allowed as the feature/${GITHUB_HEAD_REF##*/} has not been merge into develop yet"
             exit 1
