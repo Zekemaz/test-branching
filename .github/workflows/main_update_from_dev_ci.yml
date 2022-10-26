@@ -8,8 +8,6 @@ on:
     branches:
       - main
 
-
-# https://stackoverflow.com/questions/62750603/github-actions-trigger-another-action-after-one-action-is-completed#:~:text=2.-,Separate,-workflow%2C%20using%20the
 jobs:
   update_pull_request_from_dev_if:
     if: github.event.workflow_run.conclusion == 'success'
@@ -19,6 +17,7 @@ jobs:
       - name: run test
         run: |
           echo "running test on main if DevelopCI has passed"
+          origin/feature/${GITHUB_HEAD_REF##*/}
           if [ $(git branch -r --merged origin/develop | grep origin/feature/${GITHUB_HEAD_REF##*/}) != origin/feature/${GITHUB_HEAD_REF##*/} && $(git branch -r --merged origin/develop | grep origin/feature/${GITHUB_HEAD_REF##*/}) != origin/feature/]; then
             echo "The current pull request is not allowed as the feature/${GITHUB_HEAD_REF##*/} has not been merge into develop yet"
             exit 1
