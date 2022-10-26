@@ -11,22 +11,17 @@ jobs:
   dev_tests_run:
     if: startsWith(github.head_ref, 'feature/')
     runs-on: ubuntu-latest
-    name: Run unit tests
-# run tests
-#     workflow run
-#    if test fail write to a txt file
-#    workflow run on main
-#    if fail don't merge
+    name: Unit tests
     steps:
-      - name: Run unit tests and save results
+      - name: Unit tests
         run: |
-          echo "running unit tests"
+          echo "Unit testing"
           
   dev_integration_tests:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
-    name: Run integration tests
+    name: Integration tests
     steps:
-      - name: integration tests
+      - name: Integration tests
         run: |
-          echo "running integration tests"
+          echo "Integration testing"
