@@ -12,12 +12,14 @@ on:
 
 jobs:
   dev_tests_run:
+    if: github.event.pull_request.merge == True
     runs-on: ubuntu-latest
     name: Update main's current PR
 
     steps:
       - name: tests
         run: echo "test DevelopCI en cours"
+
 
 
 # a little comment to disrupt my whole world, I'll probably need a fixme right after I commit this shit 

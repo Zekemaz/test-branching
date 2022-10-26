@@ -15,10 +15,10 @@ on:
 
 # https://stackoverflow.com/questions/62750603/github-actions-trigger-another-action-after-one-action-is-completed#:~:text=2.-,Separate,-workflow%2C%20using%20the
 jobs:
-  update_pull_request_from_dev:
+  update_pull_request_from_dev_if:
+    if: github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     name: Check if feature is still compliant with requirements on main
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - name: run test
         run: |
@@ -31,7 +31,8 @@ jobs:
             exit 0
           fi
 
-  check_pull_request:
+  check_pull_request_if_opened:
+    if: github.event.pull_request == 'open'
     runs-on: ubuntu-latest
     name: Check if feature has been merge onto the develop branch
     steps:
