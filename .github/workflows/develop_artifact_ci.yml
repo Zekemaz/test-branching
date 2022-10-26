@@ -8,7 +8,7 @@ on:
     branches: [develop]
 
 env:
-  TEST_SUCCESS: ${{ github.event.workflow_run.conclusion == 'failure' }}
+  TEST_SUCCESS: ${{ github.event.workflow_run.conclusion == 'success' }}
 jobs:
   write_artifact_on_dev_tests_failure:
     runs-on: ubuntu-latest
