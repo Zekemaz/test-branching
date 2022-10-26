@@ -9,8 +9,10 @@ on:
 
 env:
   TEST_SUCCESS: ${{ github.event.workflow_run.conclusion == 'success' }}
+  
 jobs:
-  write_artifact_on_dev_tests_failure:
+  write_artifact_on_dev_tests:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     name: Write an artifact
     steps:
