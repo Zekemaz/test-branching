@@ -11,7 +11,26 @@ on:
     branches: [ develop ]
 
 
-jobs:      
+jobs:
+  check_for_validated_tests:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v3
+        with:
+          name: test-results-artifact
+          path: ./test-results/test-artifact.txt
+
+      - name: Display content of test-artifact
+        run: |
+          cat test-artifact.txt
+          if [ cat test-artifact.txt == false ]; then
+            exit 1
+          else
+            exit 0
+          fi
+        working-directory: ./test-results/test-artifact.txt
+
   check_pull_request_if_opened:
     if: startsWith(github.head_ref, 'feature/')
     runs-on: ubuntu-latest
@@ -33,22 +52,4 @@ jobs:
             echo "The current pull request is not allowed as the feature/${GITHUB_HEAD_REF##*/} has not been merge into develop yet"
             exit 1
           fi
-          
-  check_for_validated_tests:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/download-artifact@v3
-        with:
-          name: test-results-artifact
-          path: ./test-results/test-artifact.txt
-      
-      - name: Display content of test-artifact
-        run: | 
-          cat test-artifact.txt
-          if [ cat test-artifact.txt == false ]; then
-            exit 1
-          else
-            exit 0
-          fi
-        working-directory: ./test-results/test-artifact.txt
+        
