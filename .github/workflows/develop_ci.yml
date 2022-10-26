@@ -1,9 +1,6 @@
 name: DevelopCI
 
 on:
-  push:
-    branches:
-      - "feature/*"
   pull_request:
     types: [ opened, reopened, edited, synchronize ]
     branches:
@@ -14,13 +11,17 @@ on:
 #From then, when new commit/PR are added onto develop, the "main" PR has to be updated and ran once more
 
 jobs:
-  update_main_pr:
+  dev_tests_run:
+#    if: github.event.pull_request.merge == 'False'
     runs-on: ubuntu-latest
     name: Update main's current PR
 
     steps:
       - name: tests
-        run: echo "test en cours"
+        run: echo "test DevelopCI en cours"
+
 
 
 # a little comment to disrupt my whole world, I'll probably need a fixme right after I commit this shit 
+
+# again some shit
