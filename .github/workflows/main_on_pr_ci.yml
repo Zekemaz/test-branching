@@ -14,6 +14,7 @@ on:
 jobs:
   check_for_validated_tests:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    needs: [DevelopArtifactCI]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/download-artifact@v3
