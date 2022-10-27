@@ -20,7 +20,7 @@ jobs:
           # will download all artifacts if not specified
           # and extract them into respective subdirectories
           # https://github.com/actions/download-artifact#download-all-artifacts
-          name: test-artifact.txt
+#          name: test-artifact.txt
 #          name: ./test-results/test-artifact.txt
           # Optional, a directory where to extract artifact(s), defaults to the current directory
 #          path: extract_here
