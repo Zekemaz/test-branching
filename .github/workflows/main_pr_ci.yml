@@ -5,35 +5,9 @@ on:
     types: [opened, reopened, edited, synchronize]
     branches:
       - main
-  workflow_run:
-    workflows: [ DevelopArtifactCI ]
-    types: [ completed ]
-    branches: [ develop ]
-
-
 jobs:
-  check_for_validated_tests:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/download-artifact@v3
-        with:
-          name: test-results-artifact
-          path: ./test-results/test-artifact.txt
-
-      - name: Display content of test-artifact
-        run: |
-          cat test-artifact.txt
-          if [ cat test-artifact.txt == false ]; then
-            exit 1
-          else
-            exit 0
-          fi
-        working-directory: ./test-results/test-artifact.txt
-
   check_pull_request_if_opened:
     if: startsWith(github.head_ref, 'feature/')
-    needs: [check_for_validated_tests]
     runs-on: ubuntu-latest
     name: Check if feature has been merge onto the develop branch
     steps:
