@@ -15,7 +15,8 @@ jobs:
       # As Boolean, if test have passed then <true> else <false>
       - name: Upload test results to artifact
         run: |
-          mkdir -p ./test-results/test-artifact.txt
+          mkdir -p ./test-results
+          touch ./test-results/test-artifact.txt
           echo ${{ github.event.workflow_run.conclusion == 'success' }} > ./test-results/test-artifact.txt
           cat ./test-results/test-artifact.txt
       - uses: actions/upload-artifact@v3
