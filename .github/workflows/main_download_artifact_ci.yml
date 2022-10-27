@@ -11,17 +11,43 @@ jobs:
     runs-on: ubuntu-latest
     name: Download an artifact
     steps:
-      - uses: actions/download-artifact@v3
+      - uses: dawidd6/action-download-artifact@v2
         with:
-          name: test-results-artifact
-          path: ./test-results/test-artifact.txt
-
-      - name: Display content of test-artifact
-        run: |
-          cat test-artifact.txt
-          if [ cat test-artifact.txt == false ]; then
-            exit 1
-          else
-            exit 0
-          fi
-        working-directory: ./test-results/test-artifact.txt
+          workflow: develop_artifact_ci.yml
+          workflow_conclusion: success
+          pr: ${{github.event.pull_request.number}}
+          # Optional, uploaded artifact name,
+          # will download all artifacts if not specified
+          # and extract them into respective subdirectories
+          # https://github.com/actions/download-artifact#download-all-artifacts
+          name: ./test-results/test-artifact.txt
+          # Optional, a directory where to extract artifact(s), defaults to the current directory
+#          path: extract_here
+          # Optional, check the workflow run to whether it has an artifact
+          # then will get the last available artifact from the previous workflow
+          # default false, just try to download from the last one
+#          check_artifacts: false
+          # Optional, search for the last workflow run whose stored an artifact named as in `name` input
+          # default false
+          search_artifacts: true
+          # Optional, choose to skip unpacking the downloaded artifact(s)
+          # default false
+          skip_unpack: false
+          # Optional, choose how to exit the action if no artifact is found
+          # can be one of:
+          #  "fail", "warn", "ignore"
+          # default fail
+          if_no_artifact_found: fail
+#        with:
+#          name: test-results-artifact
+#          path: ./test-results/test-artifact.txt
+#
+#      - name: Display content of test-artifact
+#        run: |
+#          cat test-artifact.txt
+#          if [ cat test-artifact.txt == false ]; then
+#            exit 1
+#          else
+#            exit 0
+#          fi
+#        working-directory: ./test-results/test-artifact.txt
