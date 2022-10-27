@@ -15,8 +15,8 @@ jobs:
         with:
           workflow: ${{ github.event.workflow_run.workflow_id }}
           workflow_conclusion: success
-          branch: develop
-          name: test-results-artifact
+#          branch: develop
+#          name: test-results-artifact
 #        run: |
 #          cat test-results-artifact/test-artifact.txt
 #          if [ cat test-artifact.txt == false ]; then
