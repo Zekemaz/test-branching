@@ -1,4 +1,4 @@
-name: MainCI
+name: MainPRCI
 
 on:
   pull_request:
