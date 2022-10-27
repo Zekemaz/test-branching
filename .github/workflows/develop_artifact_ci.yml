@@ -7,7 +7,7 @@ on:
     types: 
       - completed
 #    [completed]
-    branches: [develop]
+#    branches: [develop]
 
 env:
   TEST_SUCCESS: ${{ github.event.workflow_run.conclusion == 'success' }}
