@@ -4,7 +4,10 @@ on:
   #  Will only run when a workflow named DevelopCI runs on a branch named "develop"
   workflow_run:
     workflows: [DevelopCI]
-#    types: [completed]
+    types: 
+      - completed
+#    [completed]
+    branches: [develop]
 
 env:
   TEST_SUCCESS: ${{ github.event.workflow_run.conclusion == 'success' }}
