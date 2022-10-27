@@ -9,7 +9,7 @@ on:
 
 jobs:
   update_pull_request_from_dev_if:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }} && startsWith(github.head_ref, 'feature/')
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     name: Check if feature is still compliant with requirements on main
     steps:
