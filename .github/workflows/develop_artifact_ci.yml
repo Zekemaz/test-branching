@@ -4,7 +4,7 @@ on:
   #  Will only run when a workflow named DevelopCI runs on a branch named "develop"
   workflow_run:
     workflows: [DevelopCI]
-    types: [requested]
+    types: [completed]
 
 env:
   TEST_SUCCESS: ${{ github.event.workflow_run.conclusion == 'success' }}
@@ -19,7 +19,8 @@ jobs:
       - name: Upload test results to artifact
         run: |
           mkdir -p ./test-results/test-artifact.txt
-          echo $TEST_SUCCESS > ./test-results/test-artifact.txt
+          echo ${{ github.event.workflow_run.conclusion == 'success' }} > ./test-results/test-artifact.txt
+          cat ./test-results/test-artifact.txt
       - uses: actions/upload-artifact@v3
         with:
           name: test-results-artifact
