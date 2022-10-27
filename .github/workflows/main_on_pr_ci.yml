@@ -14,7 +14,6 @@ on:
 jobs:
   check_for_validated_tests:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
-    needs: [DevelopArtifactCI]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/download-artifact@v3
@@ -34,6 +33,7 @@ jobs:
 
   check_pull_request_if_opened:
     if: startsWith(github.head_ref, 'feature/')
+    needs: [check_for_validated_tests]
     runs-on: ubuntu-latest
     name: Check if feature has been merge onto the develop branch
     steps:
