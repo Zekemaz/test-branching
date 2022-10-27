@@ -1,17 +1,11 @@
 name: DevelopArtifactCI
 
-on:
   #  Will only run when a workflow named DevelopCI runs on a branch named "develop"
+on:
   workflow_run:
     workflows: [DevelopCI]
-    types: 
-      - completed
-#    [completed]
-#    branches: [develop]
+    types: [completed]
 
-env:
-  TEST_SUCCESS: ${{ github.event.workflow_run.conclusion == 'success' }}
-  
 jobs:
   write_artifact_on_dev_tests:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
