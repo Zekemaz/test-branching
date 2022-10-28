@@ -24,6 +24,5 @@ jobs:
             node-version: 12
       - name: run script to update MainPRCI
         run: |
-          npm init -y
-          npm install octokit --save
+          npm install octokit
           node updatePR.js
