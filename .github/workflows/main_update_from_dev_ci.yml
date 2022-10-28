@@ -18,5 +18,9 @@ jobs:
             exit 1
           fi
 #       trigger MainPRCI
+      - name: use Node.js v12
+        uses: actions/setup-node@v1
+        with:
+            node-version: 12
       - name: run script to update MainPRCI
         run: node updatePR.js
