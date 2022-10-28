@@ -4,8 +4,6 @@ on:
   workflow_run:
     workflows: [DevelopCI]
     types: [completed]
-    branches:
-      - main
 
 jobs:
   update_pull_request_from_dev_if:
@@ -26,7 +24,6 @@ jobs:
       - name: check feature has been merged
         run: |
           cat .git/HEAD
-          echo "running test on main if DevelopCI has passed"
           echo origin/feature/${GITHUB_HEAD_REF##*/}
           echo origin/feature/${GITHUB_REF##*/}
           echo origin/feature/${GITHUB_HEAD_REF}
