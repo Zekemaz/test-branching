@@ -31,15 +31,6 @@
 
 
 
-<<<<<<< Updated upstream
-    octokit.rest.pulls.update({
-        owner: repoOwner,
-        repo: repoName,
-        body: data.body + "\n\n verify PR's status",
-        pull_number: prId,
-    });
-})();
-=======
 const core = require('@actions/core')
 const github = require('@actions/github')
 const artifact = require('@actions/artifact')
