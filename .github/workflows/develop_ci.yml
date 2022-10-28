@@ -2,25 +2,19 @@ name: DevelopCI
 
 on:
   pull_request:
-    types: [ opened, reopened, edited, synchronize ]
+    types: [ opened, synchronize, closed ]
     branches:
       - develop
 
 jobs:
   dev_tests_run:
-    if: startsWith(github.head_ref, 'feature/')
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
-    name: Unit tests
+    name: Tests
     steps:
       - name: Unit tests
         run: |
           echo "Unit testing"
-          
-  dev_integration_tests:
-    if: github.event.pull_request.merged == true
-    runs-on: ubuntu-latest
-    name: Integration tests
-    steps:
       - name: Integration tests
         run: |
           echo "Integration testing"
