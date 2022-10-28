@@ -23,5 +23,6 @@
     });
 })();
 
+//le js c'est nul
 
 //comment
