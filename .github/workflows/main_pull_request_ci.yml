@@ -19,6 +19,9 @@ jobs:
       - name: Get merged branches
         run: |
           echo origin/feature/${GITHUB_HEAD_REF##*/}
+          echo origin/feature/${GITHUB_REF##*/}
+          echo origin/feature/${GITHUB_HEAD_REF}
+          echo origin/feature/${GITHUB_REF}
           echo $(git branch -r --merged origin/develop)
           if [ $(git branch -r --merged origin/develop | grep origin/feature/${GITHUB_HEAD_REF##*/}) && $(git branch -r --merged origin/develop | grep origin/feature/${GITHUB_HEAD_REF##*/}) != origin/feature/]; then
             echo "The branch feature/${GITHUB_HEAD_REF##*/} is allowed to be merged into master since it has already been merged into develop"
