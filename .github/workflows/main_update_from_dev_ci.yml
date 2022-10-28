@@ -28,5 +28,5 @@ jobs:
           fetch-depth: 0
       - name: run script to update MainPRCI
         run: |
-          npm install octokit
+          npm install @actions/github
           node updatePR.js
