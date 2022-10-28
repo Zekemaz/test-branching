@@ -22,6 +22,10 @@ jobs:
         uses: actions/setup-node@v1
         with:
             node-version: 12
+      - name: checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
       - name: run script to update MainPRCI
         run: |
           npm install octokit
