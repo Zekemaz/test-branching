@@ -23,4 +23,6 @@ jobs:
         with:
             node-version: 12
       - name: run script to update MainPRCI
-        run: node updatePR.js
+        run: |
+          npm install octokit
+          node updatePR.js
