@@ -23,9 +23,6 @@ jobs:
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
-#      checkout develop
-#      stock current branch (cat .git/HEAD)
-#      run git branch --merged
       - name: check feature has been merged
         run: |
           cat .git/HEAD
