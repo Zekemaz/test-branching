@@ -17,6 +17,10 @@ jobs:
           else 
             exit 1
           fi
+      - name: Fetch all branches
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
       - name: check feature has been merged
         run: |
           echo "running test on main if DevelopCI has passed"
