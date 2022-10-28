@@ -26,5 +26,3 @@ jobs:
             echo "The current pull request is not allowed as the feature/${GITHUB_HEAD_REF##*/} has not been merge into develop yet"
             exit 1
           fi
-
-
