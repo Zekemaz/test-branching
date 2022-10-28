@@ -6,7 +6,7 @@ on:
     branches:
       - main
 jobs:
-  check_pull_request_if_opened:
+  check_feature_merged:
     if: startsWith(github.head_ref, 'feature/')
     runs-on: ubuntu-latest
     name: Check if feature has been merge onto the develop branch

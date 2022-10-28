@@ -1,5 +1,5 @@
 name: DevelopCI
-#Add comment to differentiate from dev and main
+
 on:
   pull_request:
     types: [ opened, reopened, edited, synchronize ]

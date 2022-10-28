@@ -5,7 +5,7 @@ on:
   workflow_run:
     workflows: [DevelopCI]
     types: [completed]
-    branches: [develop]
+#    branches: [develop]
 
 jobs:
   update_pull_request_from_dev_if:

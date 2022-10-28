@@ -1,4 +1,4 @@
-name: DevelopArtifactCI
+name: DevelopTestStatusCI
 
   #  Will only run when a workflow named DevelopCI runs on a branch named "develop"
 on:
@@ -13,5 +13,10 @@ jobs:
     name: Write an artifact
     steps:
       # As Boolean, if test have passed then <true> else <false>
-      - name: Upload test results to artifact
-        run: echo ${{ github.event.workflow_run.conclusion == 'success' }}
+      - name: Develop tests results
+        run: |
+          if [ ${{ github.event.workflow_run.conclusion == 'success' }} ]; then
+            exit 0
+          else
+            exit 1
+          fi
