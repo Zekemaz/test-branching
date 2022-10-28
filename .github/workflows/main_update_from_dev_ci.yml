@@ -17,22 +17,6 @@ jobs:
           else 
             exit 1
           fi
-      - name: Fetch all branches
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-      - name: check feature has been merged
-        run: |
-          cat .git/HEAD
-          echo origin/feature/${GITHUB_HEAD_REF##*/}
-          echo origin/feature/${GITHUB_REF##*/}
-          echo origin/feature/${GITHUB_HEAD_REF}
-          echo origin/feature/${GITHUB_REF}
-          echo $(git branch -r --merged origin/develop)
-          if [ $(git branch -r --merged origin/develop | grep origin/feature/${GITHUB_HEAD_REF##*/}) && $(git branch -r --merged origin/develop | grep origin/feature/${GITHUB_HEAD_REF##*/}) != origin/feature/]; then
-            echo "The branch feature/${GITHUB_HEAD_REF##*/} is allowed to be merged into master since it has already been merged into develop"
-            exit 0
-          else
-            echo "The current pull request is not allowed as the feature/${GITHUB_HEAD_REF##*/} has not been merge into develop yet"
-            exit 1
-          fi
+#       trigger MainPRCI
+      - name: run script to update MainPRCI
+        run: node /updatePR.js
