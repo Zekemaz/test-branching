@@ -19,4 +19,4 @@ jobs:
           fi
 #       trigger MainPRCI
       - name: run script to update MainPRCI
-        run: node /updatePR.js
+        run: node updatePR.js
