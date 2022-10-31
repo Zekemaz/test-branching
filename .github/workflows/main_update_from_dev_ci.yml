@@ -21,12 +21,16 @@ jobs:
         uses: actions/setup-node@v1
         with:
             node-version: 12
+
       - name: checkout
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
+
+      - name: echo github ref
+        run: echo ${GITHUB_REF##*/}
+
       - name: run script to update MainPRCI
         run: |
           npm install @actions/github
-          echo ${GITHUB_REF##*/}
           node updatePR.js ${GITHUB_REF##*/}
