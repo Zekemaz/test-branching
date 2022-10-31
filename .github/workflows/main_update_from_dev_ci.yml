@@ -28,6 +28,4 @@ jobs:
       - name: run script to update MainPRCI
         run: |
           npm install @actions/github
-#          check if pr on main is opened,
-#  if so get pr number for identification and pass it into the js script
           node updatePR.js ${GITHUB_REF##*/}
