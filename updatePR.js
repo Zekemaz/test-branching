@@ -3,7 +3,7 @@
     prId = process.argv[1]
     const github = require('@actions/github');
 
-    const token = "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"
+    const token = "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"
     const [repoOwner, repoName] = process.env.GITHUB_REPOSITORY.split('/');
 
     // const prNum = github.context.payload.pull_request.number;
