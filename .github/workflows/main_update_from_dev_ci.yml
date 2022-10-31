@@ -28,7 +28,7 @@ jobs:
           fetch-depth: 0
 
       - name: echo stuff
-        run: echo "$GITHUB_CONTEXT"
+        run: echo ${GITHUB_CONTEXT}
 
       - name: run script to update MainPRCI
         run: |
