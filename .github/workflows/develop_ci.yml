@@ -18,3 +18,12 @@ jobs:
       - name: Integration tests
         run: |
           echo "Integration testing"
+
+      - name: Save PR number
+        run: |
+          mkdir -p ./pr
+          echo ${{ github.event.number }} > ./pr/pr_number
+      - uses: actions/upload-artifact@v3
+        with:
+            name: pr_number
+            path: pr/
