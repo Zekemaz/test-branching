@@ -32,14 +32,17 @@ jobs:
       - uses: actions/download-artifact@v3
         with:
           name: pr_number
-          path: ./pr/pr_number
+          path: ./pr/pr_number.txt
 
       - name: Display content of test-artifact
         run: |
           cat pr_number
+          cat pr_number.txt
           PR_NUMBER=pr_number
+          PR_NUMBER_BIS=pr_number.txt
           echo $PR_NUMBER
-        working-directory: ./pr/pr_number
+          echo $PR_NUMBER_BIS
+        working-directory: ./pr/pr_number.txt
 
       - name: run script to update MainPRCI
         run: |

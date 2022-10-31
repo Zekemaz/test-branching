@@ -22,7 +22,7 @@ jobs:
       - name: Save PR number
         run: |
           mkdir -p ./pr
-          echo ${{ github.event.number }} > ./pr/pr_number
+          echo ${{ github.event.number }} > ./pr/pr_number.txt
       - uses: actions/upload-artifact@v3
         with:
             name: pr_number
