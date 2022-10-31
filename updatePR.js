@@ -8,6 +8,8 @@
 
     // const prNum = github.context.payload.pull_request.number;
 
+    console.log(github)
+    console.log(github.context)
     const octokit = github.getOctokit(token);
 
 
