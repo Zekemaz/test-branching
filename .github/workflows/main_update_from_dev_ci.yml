@@ -17,6 +17,7 @@ jobs:
           else 
             exit 1
           fi
+
       - name: use Node.js v12
         uses: actions/setup-node@v1
         with:
@@ -38,7 +39,6 @@ jobs:
           cat pr_number
           PR_NUMBER=pr_number
           echo $PR_NUMBER
-
         working-directory: ./pr/pr_number
 
       - name: run script to update MainPRCI
