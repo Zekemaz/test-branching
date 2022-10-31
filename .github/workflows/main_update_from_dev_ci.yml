@@ -28,4 +28,5 @@ jobs:
       - name: run script to update MainPRCI
         run: |
           npm install @actions/github
+          echo ${GITHUB_REF##*/}
           node updatePR.js ${GITHUB_REF##*/}
