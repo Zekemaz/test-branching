@@ -26,3 +26,14 @@ jobs:
             echo "The current pull request is not allowed as the origin/feature/${GITHUB_HEAD_REF##*/} has not been merge into develop yet"
             exit 1
           fi
+
+      - name: Write pr_number to file
+        run: |
+          mkdir -p ./pr
+          echo ${{ github.event.number }} > ./pr/pr_number.txt
+          echo ${GITHUB_REF##*/} > ./pr/github_ref.txt
+          echo ${GITHUB_HEAD_REF##*/} > ./pr/github_head_ref.txt
+      - uses: actions/upload-artifact@v3
+        with:
+            name: pr_number
+            path: pr/

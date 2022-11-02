@@ -1,0 +1,22 @@
+name: DeleteArtifacts
+
+on:
+  pull_request:
+    types: closed
+    branches:
+      - main
+jobs:
+  delete_artifacts:
+    runs-on: ubuntu-latest
+    name: Once the PR has been merged, delete the artifacts
+    steps:
+      - name: Fetch all branches
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Get merged branches
+        run: |
+          echo ${GITHUB_HEAD_REF##*/}
+          echo ${GITHUB_REF##*/}
+          echo ${{ github.event.number }}
+#          node delete_artifact.js

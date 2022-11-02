@@ -27,22 +27,24 @@ jobs:
         id: download-artifact
         uses: dawidd6/action-download-artifact@v2
         with:
-          workflow: develop_ci.yml
-          workflow_conclusion: success
+          workflow: main_pull_request_ci.yml
+          # Optional, the status or conclusion of a completed workflow to search for
+          # Can be one of a workflow conclusion:
+          #   "failure", "success", "neutral", "cancelled", "skipped", "timed_out", "action_required"
+          # Or a workflow status:
+          #   "completed", "in_progress", "queued"
+          # Use the empty string ("") to ignore status or conclusion in the search
+          workflow_conclusion: ""
           name: pr_number
-          # Optional, check the workflow run to whether it has an artifact
-          # then will get the last available artifact from the previous workflow
-          # default false, just try to download from the last one
-          check_artifacts: false
-          # Optional, search for the last workflow run whose stored an artifact named as in `name` input
-          # default false
-          search_artifacts: true
-          # Optional, choose how to exit the action if no artifact is found
-          # can be one of:
-          #  "fail", "warn", "ignore"
-          # default fail
-          if_no_artifact_found: fail
 
+      - name: Read artifacts
+        run: |
+          cat pr_number.txt
+          cat ./pr/pr_number.txt
+          cat pr_number_bis.txt
+          cat ./pr/pr_number_bis.txt
+          cat pr_number_third.txt
+          cat ./pr/pr_number_third.txt
 #      - name: Download artifacts
 #        uses: actions/download-artifact@v3
 #        with:
