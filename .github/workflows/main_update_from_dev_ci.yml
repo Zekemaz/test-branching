@@ -23,18 +23,25 @@ jobs:
         with:
             node-version: 12
 
-      - uses: actions/checkout@v2
-        name: checkout
-#        with:
-#          fetch-depth: 0
-
-      - uses: ./github/actions
-        name: Download artifact
+      - name: Download artifact
+        id: download-artifact
+        uses: dawidd6/action-download-artifact@v2
         with:
           workflow: develop_ci.yml
           workflow_conclusion: success
           name: pr_number
+          # Optional, check the workflow run to whether it has an artifact
+          # then will get the last available artifact from the previous workflow
+          # default false, just try to download from the last one
+          check_artifacts: false
+          # Optional, search for the last workflow run whose stored an artifact named as in `name` input
+          # default false
           search_artifacts: true
+          # Optional, choose how to exit the action if no artifact is found
+          # can be one of:
+          #  "fail", "warn", "ignore"
+          # default fail
+          if_no_artifact_found: fail
 
 #      - name: Download artifacts
 #        uses: actions/download-artifact@v3
@@ -53,8 +60,8 @@ jobs:
 #          echo $PR_NUMBER
 #          echo $PR_NUMBER_BIS
 #        working-directory: ./pr/pr_number.txt
-#
-#      - name: run script to update MainPRCI
-#        run: |
-#          npm install @actions/github
-#          node updatePR.js ${PR_NUMBER}
+
+      - name: run script to update MainPRCI
+        run: |
+          npm install @actions/github
+          node updatePR.js ${PR_NUMBER}
