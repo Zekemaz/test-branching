@@ -34,7 +34,7 @@ jobs:
 
       - name: Read artifacts
         run: |
-          PR_NUMBER = cat pr_number.txt
+          PR_NUMBER=$(cat pr_number.txt)
 
       - name: use Node.js v12
         uses: actions/setup-node@v1
