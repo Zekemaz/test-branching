@@ -2,7 +2,7 @@ name: DevelopCI
 
 on:
   pull_request:
-    types: [closed ]
+    types: [closed]
     branches:
       - develop
 
