@@ -1,6 +1,4 @@
 # test-branching
 
 
-new line in the readme
-
-again
+Let's delete the old lines and add new ones
