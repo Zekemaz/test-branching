@@ -1,8 +1,3 @@
 # test-branching
 
-new stuff
-
-new stuff
-
-
-new stuff again
+deleting old stuff and adding new stuff
