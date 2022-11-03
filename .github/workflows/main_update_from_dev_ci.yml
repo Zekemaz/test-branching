@@ -33,7 +33,7 @@ jobs:
 
       - name: Read artifacts
         run: |
-          PR_NUMBER=$(cat pr_list.txt | grep ${{ github.sha }}: | rev | cut -d: -f 1 | rev)
+          PR_NUMBER=$(cat ./pr_list/pr_list.txt | grep ${{ github.sha }}: | rev | cut -d: -f 1 | rev)
 
       - name: use Node.js v12
         uses: actions/setup-node@v1

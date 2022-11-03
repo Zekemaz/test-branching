@@ -28,11 +28,12 @@ jobs:
 
       - name: Write commit:pr_number and pr_list history to file
         run: |
-          if [[ -f pr_list.txt ]]; then
-            CURRENT_PR_LIST=$(cat pr_list.txt)
-            rm pr_list.txt
-            echo $CURRENT_PR_LIST >> pr_list.txt
-            echo ${{ github.sha }}:${{ github.event.number }} >> pr_list.txt
+          if [[ -f "./pr_list/pr_list.txt" ]]; then
+            CURRENT_PR_LIST=$(cat ./pr_list/pr_list.txt)
+            rm -rf ./pr_list
+            mkdir -p ./pr_list
+            echo $CURRENT_PR_LIST >> ./pr_list/pr_list.txt
+            echo ${{ github.sha }}:${{ github.event.number }} >> ./pr_list/pr_list.txt
           fi
 
       - name: use Node.js v12
@@ -43,10 +44,10 @@ jobs:
       - name: Delete old artifact
         run: |
           npm install @actions/github
-          node delete_artifact.js
+          node delete_artifact.js ${{ secrets.TOKEN_ACCESS }}
 
       - name: Upload updated artifact
         uses: actions/upload-artifact@v3
         with:
           name: pr_list
-          path: ./pr_list.txt
+          path: ./pr_list
