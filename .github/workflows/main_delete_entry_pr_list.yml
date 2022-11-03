@@ -29,8 +29,7 @@ jobs:
         run: |
           if [[ -f "./pr_list.txt" ]]; then
             UPDATED_PR_LIST=$(cat ./pr_list.txt | grep -v ${{ github.sha }})
-            rm ./pr_list
-            mkdir -p ./pr_list
+            rm ./pr_list.txt
             echo $UPDATED_PR_LIST >> ./pr_list.txt
           else
             echo "No artifact `pr_list` found in path: ./"

@@ -31,7 +31,7 @@ jobs:
           if [[ -f "./pr_list.txt" ]]; then
             cat ./pr_list.txt
             CURRENT_PR_LIST=$(cat ./pr_list.txt)
-            rm ./pr_list
+            rm ./pr_list.txt
             echo $CURRENT_PR_LIST >> ./pr_list.txt
             echo ${{ github.sha }}:${{ github.event.number }} >> ./pr_list.txt
           else
