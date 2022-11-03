@@ -1,6 +1,6 @@
 (async () => {
     const github = require('@actions/github');
-    const token = "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"
+    const token = "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"
     const [repoOwner, repoName] = process.env.GITHUB_REPOSITORY.split('/');
     const octokit = github.getOctokit(token);
 
