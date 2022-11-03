@@ -41,8 +41,8 @@ jobs:
       - name: Read artifacts
         run: |
           echo ${{ github.sha }}
-          PR_NUMBER=$(cat ./pr_list.txt | grep ${{ github.sha }}: | rev | cut -d: -f 1 | rev)
-          cat ./pr_list.txt | grep ${{ github.sha }}: | rev | cut -d: -f 1 | rev
+          PR_NUMBER=$(cat ./pr_list.txt | grep ${{ github.event.pull_request.head.sha }}: | rev | cut -d: -f 1 | rev)
+          cat ./pr_list.txt | grep ${{ github.event.pull_request.head.sha }}: | rev | cut -d: -f 1 | rev
       - name: use Node.js v12
         uses: actions/setup-node@v1
         with:

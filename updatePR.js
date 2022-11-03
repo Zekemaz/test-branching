@@ -8,7 +8,6 @@
 
     console.log(github)
     console.log(github.context)
-    console.log(octokit)
 
     const {data} = await octokit.rest.pulls.get({
         owner: repoOwner,
