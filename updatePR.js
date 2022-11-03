@@ -1,7 +1,10 @@
 (async () => {
 
     const pullRequestNumber = process.argv[2]
+    console.log(pullRequestNumber)
     const token = process.argv[3]
+    console.log(token)
+    console.log(process.argv)
     const github = require('@actions/github');
     const [repoOwner, repoName] = process.env.GITHUB_REPOSITORY.split('/');
     const octokit = github.getOctokit(token);

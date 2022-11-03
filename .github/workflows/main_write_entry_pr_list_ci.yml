@@ -33,12 +33,8 @@ jobs:
             CURRENT_PR_LIST=$(cat ./pr_list.txt)
             rm ./pr_list.txt
             echo $CURRENT_PR_LIST >> ./pr_list.txt
-            echo "OBJET GITHUB LÀ" ${{ github }}
-          
             echo ${{ github.event.pull_request.head.sha }}:${{ github.event.number }} >> ./pr_list.txt
-            echo ${{ github.event.pull_request.head.sha }}
           else
-            echo ${{ github.event.pull_request.head.sha }}
             echo ${{ github.event.pull_request.head.sha }}:${{ github.event.number }} >> ./pr_list.txt
           fi
 
