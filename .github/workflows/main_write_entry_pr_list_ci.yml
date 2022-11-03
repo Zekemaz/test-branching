@@ -28,11 +28,11 @@ jobs:
 
       - name: Write commit:pr_number and pr_list history to file
         run: |
-          if [[ -f pr_list ]]; then
-            CURRENT_PR_LIST=$(cat pr_list)
-            rm pr_list
-            echo $CURRENT_PR_LIST >> pr_list
-            echo ${{ github.sha }}:${{ github.event.number }} >> pr_list
+          if [[ -f pr_list.txt ]]; then
+            CURRENT_PR_LIST=$(cat pr_list.txt)
+            rm pr_list.txt
+            echo $CURRENT_PR_LIST >> pr_list.txt
+            echo ${{ github.sha }}:${{ github.event.number }} >> pr_list.txt
           fi
 
       - name: use Node.js v12
@@ -49,4 +49,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: pr_list
-          path: ./
+          path: ./pr_list.txt
