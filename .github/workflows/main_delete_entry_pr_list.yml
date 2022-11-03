@@ -1,0 +1,29 @@
+name: DeleteArtifacts
+
+on:
+  pull_request:
+    types: closed
+    branches:
+      - main
+jobs:
+  delete_artifacts:
+    runs-on: ubuntu-latest
+    name: Once the PR has been merged, delete the artifacts
+    steps:
+      - name: Fetch all branches
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Download artifact
+        id: download-artifact
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          workflow: main_write_entry_pr_list_ci.yml
+          workflow_conclusion: ""
+          name: pr_list
+
+      - name: Update pr_list
+        run: |
+          PR_LIST=$(cat pr_list | grep -v ${commit})
+          echo $PR_LIST > pr_list

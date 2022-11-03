@@ -10,6 +10,7 @@
         owner: repoOwner,
         repo: repoName
     })
+
     console.log(artifacts)
 
     for (let i = 0; i < artifacts.total_count; i++) {

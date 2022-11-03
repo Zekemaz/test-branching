@@ -1,0 +1,48 @@
+name: MainWriteToPrListCI
+
+on:
+  pull_request:
+    types: [opened, reopened]
+    branches:
+      - main
+
+env:
+  PR_LIST_FILENAME: pr_list
+
+jobs:
+  check_feature_merged:
+    if: startsWith(github.head_ref, 'feature/')
+    runs-on: ubuntu-latest
+    name: Check if feature has been merge onto the develop branch
+    steps:
+      - name: Fetch all branches
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Download artifact
+        id: download-artifact
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          workflow: main_write_entry_pr_list_ci.yml
+          workflow_conclusion: ""
+          name: pr_list
+          if_no_artifact_found: warn
+
+      - name: Write commit:pr_number to file
+        run: |
+          if [[ -f "$PR_LIST_FILENAME" ]]; then
+            CURRENT_PR_LIST=$(cat $PR_LIST_FILENAME)
+            echo $CURRENT_PR_LIST >> $PR_LIST_FILENAME
+            echo ${{ github.sha }}:${{ github.event.number }} >> $PR_LIST_FILENAME
+          fi
+
+      - name: Delete old artifact
+        run: |
+          node delete_artifact.js
+
+      - name: Upload updated artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: $PR_LIST_FILENAME
+          path: ./

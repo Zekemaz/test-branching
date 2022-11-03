@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Check if feature is still compliant with requirements on main
     steps:
-      - name: check developCI passed
+      - name: Check DevelopCI is successfull
         run: |
           if [ ${{ github.event.workflow_run.conclusion == 'success' }} ]; then
             exit 0
@@ -18,23 +18,22 @@ jobs:
             exit 1
           fi
 
+      - name: Fetch all branches
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
       - name: Download artifact
         id: download-artifact
         uses: dawidd6/action-download-artifact@v2
         with:
-          workflow: main_pull_request_ci.yml
-          # Optional, the status or conclusion of a completed workflow to search for
-          # Can be one of a workflow conclusion:
-          #   "failure", "success", "neutral", "cancelled", "skipped", "timed_out", "action_required"
-          # Or a workflow status:
-          #   "completed", "in_progress", "queued"
-          # Use the empty string ("") to ignore status or conclusion in the search
+          workflow: main_write_entry_pr_list_ci.yml
           workflow_conclusion: ""
-          name: pr_number
+          name: pr_list
 
       - name: Read artifacts
         run: |
-          PR_NUMBER=$(cat pr_number.txt)
+          PR_NUMBER=$(cat pr_list | grep ${{ github.sha }}: | rev | cut -d: -f 1 | rev)
 
       - name: use Node.js v12
         uses: actions/setup-node@v1

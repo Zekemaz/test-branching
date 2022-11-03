@@ -16,24 +16,6 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Write pr_number to file
-        run: |
-          mkdir -p ./pr
-          echo ${{ github.event.number }} > ./pr/pr_number.txt
-      - uses: actions/upload-artifact@v3
-        with:
-            name: pr_number
-            path: pr/
-
-      - name: Write workflow_run_id to file
-        run: |
-          mkdir -p ./workflow_run_id
-          echo ${{ github.run_id }} > ./workflow_run_id/pr_number_${{ github.event.number }}_workflow_run_id.txt
-      - uses: actions/upload-artifact@v3
-        with:
-            name: workflow_run_id
-            path: workflow_run_id/
-
       - name: Get merged branches
         run: |
           echo $(git branch -r --merged origin/develop)
