@@ -51,4 +51,5 @@ jobs:
       - name: run script to update MainPRCI
         run: |
           npm install @actions/github
+          echo $PR_NUMBER
           node updatePR.js $PR_NUMBER ${{ secrets.TOKEN_ACCESS }}
