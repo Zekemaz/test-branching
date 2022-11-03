@@ -19,7 +19,7 @@
     octokit.rest.pulls.update({
         owner: repoOwner,
         repo: repoName,
-        body: data.body + "\n\n verify PR's status",
+        body: data.body + "\n",
         pull_number: pullRequestNumber,
     });
 })();
