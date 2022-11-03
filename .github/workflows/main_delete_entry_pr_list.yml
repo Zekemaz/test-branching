@@ -6,9 +6,6 @@ on:
     branches:
       - main
 
-env:
-  PR_LIST_FILENAME: pr_list
-
 jobs:
   delete_artifacts:
     runs-on: ubuntu-latest
@@ -30,10 +27,11 @@ jobs:
 
       - name: Write commit:pr_number and pr_list history to file
         run: |
-          if [[ -f "$PR_LIST_FILENAME" ]]; then
-            CURRENT_PR_LIST=$(cat $PR_LIST_FILENAME)
-            echo $CURRENT_PR_LIST >> $PR_LIST_FILENAME
-            echo ${{ github.sha }}:${{ github.event.number }} >> $PR_LIST_FILENAME
+          if [[ -f pr_list ]]; then
+            CURRENT_PR_LIST=$(cat pr_list)
+            rm pr_list
+            echo $CURRENT_PR_LIST >> pr_list
+            echo ${{ github.sha }}:${{ github.event.number }} >> pr_list
           fi
 
       - name: use Node.js v12
@@ -49,5 +47,5 @@ jobs:
       - name: Upload updated artifact
         uses: actions/upload-artifact@v3
         with:
-          name: $PR_LIST_FILENAME
+          name: pr_list
           path: ./

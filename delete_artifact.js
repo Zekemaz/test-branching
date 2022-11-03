@@ -1,7 +1,6 @@
 (async () => {
-    const workflow_run_id = process.argv[1]
     const github = require('@actions/github');
-    const token = "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"
+    const token = "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"
     const [repoOwner, repoName] = process.env.GITHUB_REPOSITORY.split('/');
     const octokit = github.getOctokit(token);
 
@@ -14,13 +13,10 @@
     console.log(artifacts)
 
     for (let i = 0; i < artifacts.total_count; i++) {
-
-        if (artifacts.artifacts[i].workflow_run.id === workflow_run_id) {
-            await octokit.request('DELETE /repos/{owner}/{repo}/actions/artifacts/{artifact_id}', {
-                owner: repoOwner,
-                repo: repoName,
-                artifact_id: artifacts.artifacts[i]
-            })
-        }
+        await octokit.request('DELETE /repos/{owner}/{repo}/actions/artifacts/{artifact_id}', {
+            owner: repoOwner,
+            repo: repoName,
+            artifact_id: artifacts.artifacts[i].id
+        })
     }
 })();
