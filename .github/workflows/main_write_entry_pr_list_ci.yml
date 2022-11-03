@@ -27,16 +27,7 @@ jobs:
           if_no_artifact_found: warn
 
       - name: Write commit:pr_number and pr_list history to file
-        run: |
-          if [[ -f "./pr_list.txt" ]]; then
-            cat ./pr_list.txt
-            CURRENT_PR_LIST=$(cat ./pr_list.txt)
-            rm ./pr_list.txt
-            echo $CURRENT_PR_LIST >> ./pr_list.txt
-            echo ${{ github.event.pull_request.head.sha }}:${{ github.event.number }} >> ./pr_list.txt
-          else
-            echo ${{ github.event.pull_request.head.sha }}:${{ github.event.number }} >> ./pr_list.txt
-          fi
+        run: echo ${{ github.event.pull_request.head.sha }}:${{ github.event.number }} >> ./pr_list.txt
 
       - name: use Node.js v12
         uses: actions/setup-node@v1
