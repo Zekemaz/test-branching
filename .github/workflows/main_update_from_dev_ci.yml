@@ -8,7 +8,7 @@ on:
 jobs:
   update_pull_request_from_dev_if:
     runs-on: ubuntu-latest
-    name: Check if feature is still compliant with requirements on main
+    name: When feature is merged on develop, check if feature is still compliant with requirements on main
     steps:
       - name: Check DevelopCI is successfull
         run: |

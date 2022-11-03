@@ -13,7 +13,7 @@ jobs:
   check_feature_merged:
     if: startsWith(github.head_ref, 'feature/')
     runs-on: ubuntu-latest
-    name: Check if feature has been merge onto the develop branch
+    name: On pull_request creation, delete old pr_list file and append its data into new pr_list file
     steps:
       - name: Fetch all branches
         uses: actions/checkout@v2
@@ -29,7 +29,7 @@ jobs:
           name: pr_list
           if_no_artifact_found: warn
 
-      - name: Write commit:pr_number to file
+      - name: Write commit:pr_number and pr_list history to file
         run: |
           if [[ -f "$PR_LIST_FILENAME" ]]; then
             CURRENT_PR_LIST=$(cat $PR_LIST_FILENAME)
@@ -37,8 +37,14 @@ jobs:
             echo ${{ github.sha }}:${{ github.event.number }} >> $PR_LIST_FILENAME
           fi
 
+      - name: use Node.js v12
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+
       - name: Delete old artifact
         run: |
+          npm install @actions/github
           node delete_artifact.js
 
       - name: Upload updated artifact
