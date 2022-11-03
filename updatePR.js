@@ -17,11 +17,17 @@
         repo: repoName,
         pull_number: pullRequestNumber,
     });
+    var today = new Date();
+    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    var dateTime = date+' '+time;
+
+    console.log(dateTime)
 
     octokit.rest.pulls.update({
         owner: repoOwner,
         repo: repoName,
-        body: data.body + "\n the pr is validated",
+        body: data.body + "\n the feature has been successfully merged on develop on the " + datetime,
         pull_number: pullRequestNumber,
     });
 })();
