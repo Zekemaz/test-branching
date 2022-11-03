@@ -28,11 +28,12 @@ jobs:
       - name: Write commit:pr_number and pr_list history to file
         run: |
           if [[ -f "./pr_list/pr_list.txt" ]]; then
-            CURRENT_PR_LIST=$(cat ./pr_list/pr_list.txt)
+            UPDATED_PR_LIST=$(cat ./pr_list/pr_list.txt | grep -v ${{ github.sha }})
             rm -rf ./pr_list
             mkdir -p ./pr_list
-            echo $CURRENT_PR_LIST >> ./pr_list/pr_list.txt
-            echo ${{ github.sha }}:${{ github.event.number }} >> ./pr_list/pr_list.txt
+            echo $UPDATED_PR_LIST >> ./pr_list/pr_list.txt
+          else
+            echo "No artifact `pr_list` found"
           fi
 
       - name: use Node.js v12
