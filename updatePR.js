@@ -21,7 +21,7 @@
     octokit.rest.pulls.update({
         owner: repoOwner,
         repo: repoName,
-        body: data.body + "\n",
+        body: data.body + "\n the pr is validated",
         pull_number: pullRequestNumber,
     });
 })();
