@@ -42,7 +42,7 @@ jobs:
       - name: Delete old artifact
         run: |
           npm install @actions/github
-          node delete_artifact.js
+          node delete_artifact.js ${{ secrets.TOKEN_ACCESS }}
 
       - name: Upload updated artifact
         uses: actions/upload-artifact@v3

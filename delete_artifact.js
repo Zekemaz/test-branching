@@ -1,8 +1,8 @@
 (async () => {
+
     const github = require('@actions/github');
-    const token = "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"
     const [repoOwner, repoName] = process.env.GITHUB_REPOSITORY.split('/');
-    const octokit = github.getOctokit(token);
+    const octokit = github.getOctokit(process.argv[1]);
 
     // list all artifacts
     const {artifacts} = await octokit.request('GET /repos/{owner}/{repo}/actions/artifacts', {
