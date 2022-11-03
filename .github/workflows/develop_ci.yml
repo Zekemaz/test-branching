@@ -18,3 +18,37 @@ jobs:
       - name: Integration tests
         run: |
           echo "Integration testing"
+
+  check_artifact:
+    needs: [dev_tests_run]
+    runs-on: ubuntu-latest
+    name: Verify pr_number
+    steps:
+      - name: Fetch all branches
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Download artifact
+        id: download-artifact
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          workflow: main_write_entry_pr_list_ci.yml
+          workflow_conclusion: ""
+          name: pr_list
+          if_no_artifact_found: warn
+
+      - name: Read artifacts
+        run: |
+          echo ${{ github.sha }}
+          PR_NUMBER=$(cat ./pr_list.txt | grep ${{ github.sha }}: | rev | cut -d: -f 1 | rev)
+          cat ./pr_list.txt | grep ${{ github.sha }}: | rev | cut -d: -f 1 | rev
+      - name: use Node.js v12
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+
+      - name: run script to update MainPRCI
+        run: |
+          npm install @actions/github
+          node updatePR.js ${PR_NUMBER} ${{ secrets.TOKEN_ACCESS }}

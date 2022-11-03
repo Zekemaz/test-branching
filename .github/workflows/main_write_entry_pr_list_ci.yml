@@ -34,7 +34,9 @@ jobs:
             rm ./pr_list.txt
             echo $CURRENT_PR_LIST >> ./pr_list.txt
             echo ${{ github.sha }}:${{ github.event.number }} >> ./pr_list.txt
+            echo ${{ github.sha }}
           else
+            echo ${{ github.sha }}
             echo ${{ github.sha }}:${{ github.event.number }} >> ./pr_list.txt
           fi
 

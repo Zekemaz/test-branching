@@ -1,7 +1,6 @@
 (async () => {
 
-    const token = process.argv[1]
-    console.log(token)
+    const token = process.argv[2]
 
     const github = require('@actions/github');
     const [repoOwner, repoName] = process.env.GITHUB_REPOSITORY.split('/');
@@ -9,19 +8,19 @@
 
 
     // list all artifacts
-    const {artifacts} = await octokit.request('GET /repos/{owner}/{repo}/actions/artifacts', {
+    const {data} = await octokit.request('GET /repos/{owner}/{repo}/actions/artifacts', {
         owner: repoOwner,
-        repo: repoName
+        repo: repoName,
     })
 
-    console.log(artifacts)
-    console.log(artifacts.artifacts[1].id)
+    console.log(data)
 
-    for (let i = 0; i < artifacts.total_count; i++) {
-        await octokit.request('DELETE /repos/{owner}/{repo}/actions/artifacts/{artifact_id}', {
+    for (let i = 0; i < data.total_count; i++) {
+        res = await octokit.request('DELETE /repos/{owner}/{repo}/actions/artifacts/{artifact_id}', {
             owner: repoOwner,
             repo: repoName,
-            artifact_id: artifacts.artifacts[i].id
+            artifact_id: data.artifacts[i].id
         })
+        console.log(res)
     }
 })();
