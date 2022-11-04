@@ -24,7 +24,7 @@
     var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
     var datetime = date+' '+time;
 
-    console.log(dateTime)
+    console.log(datetime)
 
     octokit.rest.pulls.update({
         owner: repoOwner,
